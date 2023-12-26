@@ -1,0 +1,47 @@
+.paper-root {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 25px;
+  padding: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.table-title {
+  font-size: 24px; 
+  margin-bottom: 22px;
+  color: #4caf50;
+}
+
+.table-header {
+  background-color: #a5e1a7;
+  color: white !important;
+  font-weight: bold !important;
+  border: 1px solid #4caf50;
+  font-size: 14px;
+}
+
+.MuiTableCell-root,.MuiTableCell-body {
+  padding: 12px !important; 
+  text-align: left;
+  font-size: 12px;
+}
+
+.loading-spinner {
+  margin: 20px;
+  color: #4caf50 !important;
+}
+
+.error-message {
+  color: red;
+  margin: 20px;
+}
+
+/* Optional: Add a subtle box shadow to the rows for a 3D effect */
+.table-row {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
