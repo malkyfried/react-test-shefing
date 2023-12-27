@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Table, TableHead, TableRow, TableCell, TableBody, CircularProgress } from '@mui/material';
+import { Paper, Table, TableHead, TableRow, TableCell, TableBody, CircularProgress, Box } from '@mui/material';
 import './Home.css';
 import Search from '../shared/search';
 
@@ -56,13 +56,15 @@ const HomePage = () => {
   return (
     <Paper className="paper-root">
       <h1 className="table-title">Users Table</h1>
+      <Box className="search-box">
       <Search filters={filters} onFilterChange={handleFilterChange}/>
+      </Box>
       {loading ? (
         <CircularProgress className="loading-spinner" />
       ) : error ? (
         <p className="error-message">{error}</p>
       ) : (
-        <Table style={{ width: 1000 }}>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell className="table-header">Name</TableCell>

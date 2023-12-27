@@ -19,7 +19,7 @@ const Search = ({ filters, onFilterChange }) => {
                 p: '2px 4px',
                 display: 'flex',
                 alignItems: 'center',
-                width: 400,
+                width: 250,
                 '@media (max-width: 600px)': {
                     width: '100%',
                     flexDirection: 'row',
