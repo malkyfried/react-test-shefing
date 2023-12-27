@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Paper, Table, TableHead, TableRow, TableCell, TableBody, CircularProgress } from '@mui/material';
 import './Home.css';
+import Search from '../shared/search';
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [filters, setFilters] = useState({
+    name: '',
+    email: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,10 +30,33 @@ const HomePage = () => {
 
     fetchData();
   }, []);
+  
+  const handleFilterChange = (filterKey, value) => {
+    if (filterKey === 'name' || filterKey === 'email') {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        name: value,
+        email: value,
+      }));
+    } else {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [filterKey]: value,
+      }));
+    }
+  };
+
+  const filteredUsers = users.filter((user) => {
+    return Object.values(filters).some((filterValue) =>
+      user.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+      user.email.toLowerCase().includes(filterValue.toLowerCase())
+    );
+  });
 
   return (
     <Paper className="paper-root">
       <h1 className="table-title">Users Table</h1>
+      <Search filters={filters} onFilterChange={handleFilterChange}/>
       {loading ? (
         <CircularProgress className="loading-spinner" />
       ) : error ? (
@@ -43,7 +71,7 @@ const HomePage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
