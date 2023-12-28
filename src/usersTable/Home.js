@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Paper, Table, TableHead, TableRow, TableCell, TableBody, CircularProgress, Box } from '@mui/material';
 import './Home.css';
 import Search from '../shared/search';
+import UserPosts from '../userPosts/Posts';
+//import theme from '../theme'; 
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
@@ -11,6 +13,8 @@ const HomePage = () => {
     name: '',
     email: '',
   });
+
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +57,13 @@ const HomePage = () => {
     );
   });
 
+  const handleUserClick = (userId) => {
+    setSelectedUserId(userId);
+  };
+  
+
   return (
+    <div className="container">
     <Paper className="paper-root">
       <h1 className="table-title">Users Table</h1>
       <Box className="search-box">
@@ -74,7 +84,8 @@ const HomePage = () => {
           </TableHead>
           <TableBody>
             {filteredUsers.map((user) => (
-              <TableRow key={user.id}>
+              <TableRow key={user.id} onClick={() => handleUserClick(user.id)} className="table-row">
+
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.company.name}</TableCell>
@@ -84,6 +95,10 @@ const HomePage = () => {
         </Table>
       )}
     </Paper>
+    {selectedUserId && (
+      <UserPosts userId={selectedUserId} className='user-posts'/>
+    )}
+    </div>
   );
 };
 

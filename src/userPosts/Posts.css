@@ -1,0 +1,45 @@
+.user-posts {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-posts h1 {
+    font-size: 24px;
+    color: #4caf50;
+    font-weight: bold;
+  }
+  
+  .loading-spinner {
+    margin-top: 20px;
+    color: #4caf50 !important;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 20px;
+  }
+  
+  /* Styling for Material-UI List */
+  .MuiList-root {
+    width: 100%;
+  }
+  
+  /* Styling for Material-UI ListItem */
+  .MuiListItem-root {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Hover effect for Material-UI ListItem */
+  .MuiListItem-root:hover {
+    background-color: #e5e5e5;
+  }
+  
+  /* Optional: Customize Typography */
+  .MuiTypography-root {
+    font-size: 14px;
+  }
+  

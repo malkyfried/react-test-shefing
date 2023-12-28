@@ -1,8 +1,12 @@
+.container{
+  display: flex;
+}
+
 .paper-root {
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 10px;
+  margin-right: 50px;
   margin-top: 25px;
-  padding: 5px;
+  padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -13,8 +17,9 @@
 
 .table-title {
   font-size: 24px;
-  margin-bottom: 22px;
   color: #4caf50;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 30px;
 }
 
 .table-header {
@@ -67,5 +72,19 @@
 .search-box {
   position: absolute;
   top: 50px;
-  right: 120px;
+  right: 510px;
+}
+
+.table-row:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.user-posts {
+  right:50px;
+  margin-right: 20px;
+  margin-top: 20px; 
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
 }
