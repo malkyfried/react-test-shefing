@@ -3,6 +3,7 @@ import { Button, CircularProgress, List, ListItem, ListItemText, Typography } fr
 import CustomScrollbar from "../shared/scrollbar";
 import CreatePost from "../newPost/createPost";
 import './Posts.css';
+import Constants from '../../config/constants';
 
 const UserPosts = ({ userId }) => {
   const [posts, setPosts] = useState([]);
@@ -12,17 +13,30 @@ const UserPosts = ({ userId }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+      let retryCount = 5;
+      while (retryCount > 0) {
+        try {
+          const response = await fetch(`${Constants.API_ENDPOINT_POSTS}?userId=${userId}`);
+          if (!response.ok) {
+            throw new Error(Constants.HTTP_ERROR_MESSAGE(response.status));
+          }
+          const data = await response.json();
+          setPosts(data);
+          return; // Exit the function after successful attempt
+        } catch (error) {
+          if (error instanceof TypeError) {
+            setError(Constants.NETWORK_ERROR_MESSAGE);
+          } else {
+            retryCount--;
+            if (retryCount === 0) {
+              setError(Constants.UNEXPECTED_ERROR_MESSAGE);
+            } else {
+              setError(Constants.RETRYING_ERROR_MESSAGE(retryCount));
+            }
+          }
+        } finally {
+          setLoading(false);
         }
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        setError('Error fetching posts data. Please try again.');
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -38,8 +52,6 @@ const UserPosts = ({ userId }) => {
   };
 
   const handlePostCreated = (newPost) => {
-    //show posts where all posts are displayed
-    console.log("new post has been created")
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
@@ -69,6 +81,7 @@ const UserPosts = ({ userId }) => {
             {posts.map(post => (
               <ListItem key={post.id}>
                 <ListItemText primary={post.title} />
+                {/* <ListItemText >{post.body}</ListItemText>  */}
               </ListItem>
             ))}
           </List>
