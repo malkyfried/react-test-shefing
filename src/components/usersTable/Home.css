@@ -1,10 +1,9 @@
-.container{
+.container {
   display: flex;
 }
 
 .paper-root {
   margin-left: 10px;
-  margin-right: 50px;
   margin-top: 25px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,6 +27,7 @@
   font-weight: bold !important;
   border: 1px solid #4caf50;
   font-size: 14px;
+  padding-left: 10px;
 }
 
 .MuiTableCell-root,
@@ -52,7 +52,7 @@
 }
 
 .MuiTable-root {
-  width: 1000px !important;
+  margin-right: 600px;
 }
 
 .MuiTableHead-root {
@@ -64,7 +64,7 @@
 }
 
 .MuiTableCell-root {
-  padding: 12px !important;
+  padding: 12px;
   text-align: left;
   font-size: 15px;
 }
@@ -81,10 +81,64 @@
 }
 
 .user-posts {
-  right:50px;
-  margin-right: 20px;
-  margin-top: 20px; 
-  padding: 20px;
+  margin-top: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-grow: 1;
+}
+
+#go-back-btn {
+  display: none;
+  margin-bottom: 20px;
+}
+
+/* Stack rows on small screens */
+@media only screen and (max-width: 800px) {
+
+  #go-back-btn {
+    display: block;
+  }
+
+  .MuiTable-root {
+    margin-right: 0px;
+  }
+
+  .paper-root {
+    width: 500px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .table-row {
+    display: block;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px #4caf50;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .table-row:hover {
+    background-color: lightgray;
+  }
+
+  .table-row td {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table-header {
+    display: none !important;
+  }
+
+  .user-posts-container {
+    order: -1;
+  }
+
+  /* Hide .table-container when .user-posts-container is displayed */
+  .container.hide-table .table-container {
+    display: none;
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, CircularProgress, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Button, CircularProgress, List, ListItem, ListItemText, Paper } from "@mui/material";
 import CustomScrollbar from "../shared/scrollbar";
 import CreatePost from "../newPost/createPost";
 import './Posts.css';
@@ -56,10 +56,10 @@ const UserPosts = ({ userId }) => {
   };
 
   return (
-    <div className="user-posts">
+    <Paper className="paper-root">
       <CustomScrollbar>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="h1">Posts by User</Typography>
+          <h1 className="table-title">Posts by User</h1>
           <div style={{ marginRight: 'auto' }}>
             <Button variant="contained" onClick={handleDialogOpen} style={{ backgroundColor: '#4caf50', color: '#fff', marginLeft: '22px' }}>
               Create Post
@@ -87,7 +87,7 @@ const UserPosts = ({ userId }) => {
           </List>
         )}
       </CustomScrollbar>
-    </div>
+    </Paper>
   );
 };
 

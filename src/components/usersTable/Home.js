@@ -23,7 +23,7 @@ const HomePage = () => {
         try {
           const response = await fetch(Constants.API_ENDPOINT_USERS);
           if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(Constants.HTTP_ERROR_MESSAGE(response.status));
           }
           const data = await response.json();
           setUsers(data);
@@ -42,8 +42,8 @@ const HomePage = () => {
         } finally {
           setLoading(false);
         }
-      };
-    }
+      }
+    };
     fetchData();
   }, []);
 
@@ -73,6 +73,8 @@ const HomePage = () => {
 
   const handleUserClick = (userId) => {
     setSelectedUserId(userId);
+    const container = document.querySelector('.container');
+    container.classList.toggle('hide-table', !!userId);
   };
 
   return (
@@ -87,29 +89,40 @@ const HomePage = () => {
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : (
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className="table-header">Name</TableCell>
-                <TableCell className="table-header">Email</TableCell>
-                <TableCell className="table-header">Company Name</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredUsers.map((user) => (
-                <TableRow key={user.id} onClick={() => handleUserClick(user.id)} className="table-row">
-
-                  <TableCell>{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.company.name}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <div className="table-container">
+            {filteredUsers.length > 0 ? (
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="table-header">Name</TableCell>
+                    <TableCell className="table-header">Email</TableCell>
+                    <TableCell className="table-header">Company Name</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredUsers.map((user) => (
+                    <TableRow
+                      key={user.id}
+                      onClick={() => handleUserClick(user.id)}
+                      className="table-row"
+                    >
+                      <TableCell>{user.name}</TableCell>
+                      <TableCell>{user.email}</TableCell>
+                      <TableCell>{user.company.name}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            ) : (
+              <p>No users found.</p>
+            )}
+          </div>
         )}
       </Paper>
       {selectedUserId && (
-        <UserPosts userId={selectedUserId} className='user-posts' />
+        <div className="user-posts-container">
+          <UserPosts userId={selectedUserId} className='user-posts' />
+        </div>
       )}
     </div>
   );
