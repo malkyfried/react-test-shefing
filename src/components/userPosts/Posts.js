@@ -15,6 +15,7 @@ const UserPosts = ({ userId }) => {
       let retryCount = 5;
       while (retryCount > 0) {
         try {
+          // Fetch posts for the specified user from the API endpoint
           const response = await fetch(`${Constants.API_ENDPOINT_POSTS}?userId=${userId}`);
           if (!response.ok) {
             throw new Error(Constants.HTTP_ERROR_MESSAGE(response.status));
@@ -23,6 +24,7 @@ const UserPosts = ({ userId }) => {
           setPosts(data);
           return; // Exit the function after successful attempt
         } catch (error) {
+           // Handle different types of errors (network, unexpected, retrying)
           if (error instanceof TypeError) {
             setError(Constants.NETWORK_ERROR_MESSAGE);
           } else {
@@ -34,6 +36,7 @@ const UserPosts = ({ userId }) => {
             }
           }
         } finally {
+          // Set loading state to false after fetching data
           setLoading(false);
         }
       }
@@ -42,14 +45,17 @@ const UserPosts = ({ userId }) => {
     fetchPosts();
   }, [userId]);
 
+  // Event handler to open the post creation dialog
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
   };
 
+  // Event handler to close the post creation dialog
   const handleDialogClose = () => {
     setIsDialogOpen(false);
   };
 
+// Event handler for handling the creation of a new post
   const handlePostCreated = (newPost) => {
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };

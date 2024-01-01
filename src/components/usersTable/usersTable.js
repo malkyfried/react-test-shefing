@@ -1,3 +1,5 @@
+// UserTable.js
+
 import React from 'react';
 import {
   Paper,
@@ -20,6 +22,7 @@ const UserTable = ({
   onFilterChange,
   onUserClick,
 }) => {
+  // Filter users based on the provided filters (name and email)
   const filteredUsers = Array.isArray(users)
     ? users.filter((user) =>
         Object.values(filters).some(
@@ -67,7 +70,7 @@ const UserTable = ({
             </Table>
           ) : (
             <div className="no-users-found">
-            <p >No users found.</p>
+              <p>No users found.</p>
             </div>
           )}
         </div>

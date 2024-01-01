@@ -1,27 +1,18 @@
-  
-  #go-back-btn {
-    display: none;
-    margin-bottom: 20px;
-  }
-
   .posts-container {
     flex-grow: 1; 
     overflow-y: auto; 
   }
   
-  /* Stack rows on small screens */
-  @media only screen and (max-width: 800px) {
-    #go-back-btn {
-      display: block;
-    }
-  
-    .user-posts-container {
-      order: -1;
-    }
-  
-    /* Hide .table-container when .user-posts-container is displayed */
-    .container.hide-table .table-container {
-      display: none;
-    }
+/* Stack rows on small screens */
+@media only screen and (max-width: 800px) {
+  .user-posts-container {
+    order: -1;
   }
+
+  /* Hide .table-container when .user-posts-container is displayed */
+  .container.hide-table .table-container{
+    display: none;
+  }
+}
+
   
