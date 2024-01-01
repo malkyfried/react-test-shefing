@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, CircularProgress, List, ListItem, ListItemText, Paper } from "@mui/material";
 import CreatePost from "../newPost/createPost";
-import './posts.css';
+import './userPosts.css';
 import Constants from '../../config/constants';
 
 const UserPosts = ({ userId }) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UserTable from '../components/usersTable/usersTable';
-import UserPosts from '../components/userPosts/posts';
+import UserPosts from '../components/userPosts/usersPosts';
 import Constants from '../config/constants';
 import './home.css'
 import { isMobile } from 'mobile-device-detect';
