@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, CircularProgress, List, ListItem, ListItemText, Paper } from "@mui/material";
-import CustomScrollbar from "../shared/scrollbar";
 import CreatePost from "../newPost/createPost";
 import './posts.css';
 import Constants from '../../config/constants';
@@ -57,7 +56,6 @@ const UserPosts = ({ userId }) => {
 
   return (
     <Paper className="paper-root">
-      <CustomScrollbar>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h1 className="table-title">Posts by User</h1>
           <div style={{ marginRight: 'auto' }}>
@@ -77,7 +75,7 @@ const UserPosts = ({ userId }) => {
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : (
-          <List>
+          <List className="post-list">
             {posts.map(post => (
               <ListItem key={post.id}>
                 <ListItemText primary={post.title} />
@@ -86,7 +84,6 @@ const UserPosts = ({ userId }) => {
             ))}
           </List>
         )}
-      </CustomScrollbar>
     </Paper>
   );
 };
