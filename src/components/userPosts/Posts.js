@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, CircularProgress, List, ListItem, ListItemText, Paper } from "@mui/material";
 import CustomScrollbar from "../shared/scrollbar";
 import CreatePost from "../newPost/createPost";
-import './Posts.css';
+import './posts.css';
 import Constants from '../../config/constants';
 
 const UserPosts = ({ userId }) => {

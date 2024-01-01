@@ -72,7 +72,7 @@
 .search-box {
   position: absolute;
   top: 50px;
-  right: 510px;
+  left:50px
 }
 
 .table-row:hover {
@@ -80,23 +80,13 @@
   cursor: pointer;
 }
 
-.user-posts {
-  margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#go-back-btn {
-  display: none;
-  margin-bottom: 20px;
+.no-users-found {
+  margin: 50px;
+  padding: 50px;
 }
 
 /* Stack rows on small screens */
 @media only screen and (max-width: 800px) {
-
-  #go-back-btn {
-    display: block;
-  }
-
   .MuiTable-root {
     margin-right: 0px;
   }
@@ -131,14 +121,5 @@
 
   .table-header {
     display: none !important;
-  }
-
-  .user-posts-container {
-    order: -1;
-  }
-
-  /* Hide .table-container when .user-posts-container is displayed */
-  .container.hide-table .table-container {
-    display: none;
   }
 }

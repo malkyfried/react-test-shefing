@@ -1,0 +1,26 @@
+.user-posts {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #go-back-btn {
+    display: none;
+    margin-bottom: 20px;
+  }
+  
+  /* Stack rows on small screens */
+  @media only screen and (max-width: 800px) {
+    #go-back-btn {
+      display: block;
+    }
+  
+    .user-posts-container {
+      order: -1;
+    }
+  
+    /* Hide .table-container when .user-posts-container is displayed */
+    .container.hide-table .table-container {
+      display: none;
+    }
+  }
+  

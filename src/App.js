@@ -1,5 +1,5 @@
 import './App.css';
-import HomePage from './components/usersTable/Home';
+import HomePage from './pages/home';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 
