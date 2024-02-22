@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
 import Constants from "../../config/constants";
 
-const CreatePost = ({ open, onClose, userId, onPostCreated }) => {
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
-    const [error, setError] = useState("");
+interface CreatePostProps {
+    open: boolean;
+    onClose: () => void;
+    userId: number;
+    onPostCreated: (newPost: any) => void; // Update 'any' with the type of newPost object
+}
+
+const CreatePost: React.FC<CreatePostProps> = ({ open, onClose, userId, onPostCreated }) => {
+    const [title, setTitle] = useState<string>("");
+    const [body, setBody] = useState<string>("");
+    const [error, setError] = useState<string>("");
 
     const handleCreatePost = async () => {
         // Basic input validation

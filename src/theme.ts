@@ -1,6 +1,52 @@
-import { createTheme } from '@mui/material/styles';
+// theme.ts
 
-const theme = createTheme({
+import { createTheme, Theme } from '@mui/material/styles';
+
+// Define your custom typography options
+const customTypography = {
+  date: {
+    fontWeight: 400,
+    fontSize: '15px',
+    lineHeight: '22.5px',
+    color: '#5F5F5F',
+    display: 'block',
+  },
+  widget: {
+    fontWeight: 400,
+    fontSize: '46.32px',
+    lineHeight: '69.48px',
+    display: 'flex',
+    paddingTop: '15px',
+  },
+  bold: {
+    fontWeight: 500,
+    fontSize: '18px',
+    lineHeight: '27px',
+    display: 'block',
+  },
+  normal: {
+    fontStyle: 'normal',
+    fontWeight: 100,
+    lineHeight: 'normal',
+  },
+  longText: {
+    width: '80%',
+    paddingBlock: '30px',
+    lineHeight: '35.79px',
+    display: 'block',
+  },
+  boldGreen: {
+    fontWeight: 700,
+    lineHeight: '36px',
+    letterSpacing: '0em',
+    color: '#2F854F',
+    paddingTop: '3%',
+    display: 'block',
+  },
+};
+
+// Merge custom typography with default typography options
+const theme: Theme = createTheme({
   palette: {
     background: {
       default: '#F1F1F1',
@@ -45,45 +91,7 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Poppins',
     fontSize: 15,
-    date: {
-      fontWeight: 400,
-      fontSize: '15px',
-      lineHeight: ' 22.5px',
-      color: ' #5F5F5F',
-      display: 'block',
-    },
-    widget: {
-      fontWeight: 400,
-      fontSize: '46.32px',
-      lineHeight: '69.48px',
-      display: 'flex',
-      paddingTop: '15px',
-    },
-    bold: {
-      fontWeight: 500,
-      fontSize: '18px',
-      lineHeight: '27px',
-      display: 'block',
-    },
-    normal: {
-      fontStyle: 'normal',
-      fontWeight: 100,
-      lineHeight: 'normal',
-    },
-    longText: {
-      width: '80%',
-      paddingBlock: '30px',
-      lineHeight: '35.79px',
-      display: 'block',
-    },
-    boldGreen: {
-      fontWeight: 700,
-      lineHeight: '36px',
-      letterSpacing: '0em',
-      color: '#2F854F',
-      paddingTop: '3%',
-      display: 'block',
-    },
+    ...customTypography,
   },
   components: {
     MuiButton: {

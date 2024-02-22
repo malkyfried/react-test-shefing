@@ -1,5 +1,3 @@
-// UserTable.js
-
 import React from 'react';
 import {
   Paper,
@@ -14,7 +12,28 @@ import {
 import './usersTable.css';
 import Search from '../shared/search';
 
-const UserTable = ({
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  company: {
+    name: string;
+  };
+}
+
+interface UserTableProps {
+  users: User[];
+  loading: boolean;
+  error: string | null;
+  filters: {
+    name: string;
+    email: string;
+  };
+  onFilterChange: (filterKey: string, value: string) => void;
+  onUserClick: (userId: number) => void;
+}
+
+const UserTable: React.FC<UserTableProps> = ({
   users,
   loading,
   error,
@@ -23,15 +42,13 @@ const UserTable = ({
   onUserClick,
 }) => {
   // Filter users based on the provided filters (name and email)
-  const filteredUsers = Array.isArray(users)
-    ? users.filter((user) =>
-        Object.values(filters).some(
-          (filterValue) =>
-            user.name.toLowerCase().includes(filterValue.toLowerCase()) ||
-            user.email.toLowerCase().includes(filterValue.toLowerCase())
-        )
-      )
-    : [];
+  const filteredUsers = users.filter((user) =>
+    Object.values(filters).some(
+      (filterValue) =>
+        user.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        user.email.toLowerCase().includes(filterValue.toLowerCase())
+    )
+  );
 
   return (
     <Paper className="paper-root">

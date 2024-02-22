@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 
-const Search = ({ filters, onFilterChange }) => {
+interface Filters {
+  name: string;
+  email: string;
+}
 
-    const handleChange = (event) => {
+interface SearchProps {
+  filters: Filters;
+  onFilterChange: (key: string, value: string) => void;
+}
+
+const Search: React.FC<SearchProps> = ({ filters, onFilterChange }) => {
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const searchValue = event.target.value;
         Object.keys(filters).forEach((key) => (
             onFilterChange(key, searchValue)

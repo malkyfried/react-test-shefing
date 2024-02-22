@@ -2,40 +2,40 @@ import React, { useEffect, useState } from 'react';
 import UserTable from '../components/usersTable/usersTable';
 import UserPosts from '../components/userPosts/usersPosts';
 import Constants from '../config/constants';
-import './home.css'
+import './home.css';
 import { isMobile } from 'mobile-device-detect';
 
-const HomePage = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [filters, setFilters] = useState({
+interface FilterState {
+  name: string;
+  email: string;
+}
+
+const HomePage: React.FC = () => {
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [filters, setFilters] = useState<FilterState>({
     name: '',
     email: '',
   });
 
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Retry fetch in case of errors
       let retryCount = 5;
       while (retryCount > 0) {
         try {
-           // Fetch user data from the API endpoint
           const response = await fetch(Constants.API_ENDPOINT_USERS);
-          // Handle non-successful HTTP responses
           if (!response.ok) {
             throw new Error(Constants.HTTP_ERROR_MESSAGE(response.status));
           }
           const data = await response.json();
           setUsers(data);
         } catch (error) {
-           // Handle different types of errors (network, unexpected, retrying)
           if (error instanceof TypeError) {
             setError(Constants.NETWORK_ERROR_MESSAGE);
           } else {
-            // Decrement the retry count
             retryCount--;
             if (retryCount === 0) {
               setError(Constants.UNEXPECTED_ERROR_MESSAGE);
@@ -51,10 +51,8 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  // Event handler for changing filter values
-  const handleFilterChange = (filterKey, value) => {
+  const handleFilterChange = (filterKey: string, value: string) => {
     setSelectedUserId(null)
-    // Update filters based on the filter key
     if (filterKey === 'name' || filterKey === 'email') {
       setFilters((prevFilters) => ({
         ...prevFilters,
@@ -69,8 +67,7 @@ const HomePage = () => {
     }
   };
 
-  // Event handler for clicking on a user row
-  const handleUserClick = (userId) => {
+  const handleUserClick = (userId: number) => {
     setSelectedUserId(userId);
   };
 
@@ -85,7 +82,7 @@ const HomePage = () => {
             filters={filters}
             onFilterChange={handleFilterChange}
             onUserClick={handleUserClick}
-            selectedUserId={selectedUserId}
+            //selectedUserId={selectedUserId}
           />
         </div>
       )}

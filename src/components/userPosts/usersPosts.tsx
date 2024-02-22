@@ -5,27 +5,36 @@ import './userPosts.css';
 import Constants from '../../config/constants';
 import { v4 as uuidv4 } from 'uuid';
 
-const UserPosts = ({ userId }) => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+interface Post {
+  id: string;
+  title: string;
+  // Add other properties if necessary
+}
+
+interface UserPostsProps {
+  userId: number;
+  className?: string; // Declare className as optional
+}
+
+const UserPosts: React.FC<UserPostsProps> = ({ userId }) => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       let retryCount = 5;
       while (retryCount > 0) {
         try {
-          // Fetch posts for the specified user from the API endpoint
           const response = await fetch(`${Constants.API_ENDPOINT_POSTS}?userId=${userId}`);
           if (!response.ok) {
             throw new Error(Constants.HTTP_ERROR_MESSAGE(response.status));
           }
           const data = await response.json();
           setPosts(data);
-          return; // Exit the function after successful attempt
+          return;
         } catch (error) {
-          // Handle different types of errors (network, unexpected, retrying)
           if (error instanceof TypeError) {
             setError(Constants.NETWORK_ERROR_MESSAGE);
           } else {
@@ -37,7 +46,6 @@ const UserPosts = ({ userId }) => {
             }
           }
         } finally {
-          // Set loading state to false after fetching data
           setLoading(false);
         }
       }
@@ -46,25 +54,18 @@ const UserPosts = ({ userId }) => {
     fetchPosts();
   }, [userId]);
 
-  // Event handler to open the post creation dialog
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
   };
 
-  // Event handler to close the post creation dialog
   const handleDialogClose = () => {
     setIsDialogOpen(false);
   };
 
-
-
-  // Event handler for handling the creation of a new post
-  const handlePostCreated = (newPost) => {
-    // Generate a unique ID for the new post
+  const handlePostCreated = (newPost: Post) => {
     newPost.id = uuidv4();
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
-
 
   return (
     <Paper className="paper-root">
@@ -91,7 +92,6 @@ const UserPosts = ({ userId }) => {
           {posts.map(post => (
             <ListItem key={post.id}>
               <ListItemText primary={post.title} />
-              {/* <ListItemText >{post.body}</ListItemText>  */}
             </ListItem>
           ))}
         </List>
