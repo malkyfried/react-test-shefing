@@ -3,6 +3,7 @@ import { Button, CircularProgress, List, ListItem, ListItemText, Paper } from "@
 import CreatePost from "../newPost/createPost";
 import './userPosts.css';
 import Constants from '../../config/constants';
+import { v4 as uuidv4 } from 'uuid';
 
 const UserPosts = ({ userId }) => {
   const [posts, setPosts] = useState([]);
@@ -24,7 +25,7 @@ const UserPosts = ({ userId }) => {
           setPosts(data);
           return; // Exit the function after successful attempt
         } catch (error) {
-           // Handle different types of errors (network, unexpected, retrying)
+          // Handle different types of errors (network, unexpected, retrying)
           if (error instanceof TypeError) {
             setError(Constants.NETWORK_ERROR_MESSAGE);
           } else {
@@ -55,41 +56,46 @@ const UserPosts = ({ userId }) => {
     setIsDialogOpen(false);
   };
 
-// Event handler for handling the creation of a new post
+
+
+  // Event handler for handling the creation of a new post
   const handlePostCreated = (newPost) => {
+    // Generate a unique ID for the new post
+    newPost.id = uuidv4();
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
+
   return (
     <Paper className="paper-root">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <h1 className="table-title">Posts by User</h1>
-          <div style={{ marginRight: 'auto' }}>
-            <Button variant="contained" onClick={handleDialogOpen} style={{ backgroundColor: '#4caf50', color: '#fff', marginLeft: '22px' }}>
-              Create Post
-            </Button>
-          </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <h1 className="table-title">Posts by User</h1>
+        <div style={{ marginRight: 'auto' }}>
+          <Button variant="contained" onClick={handleDialogOpen} style={{ backgroundColor: '#4caf50', color: '#fff', marginLeft: '22px' }}>
+            Create Post
+          </Button>
         </div>
-        <CreatePost
-          open={isDialogOpen}
-          onClose={handleDialogClose}
-          userId={userId}
-          onPostCreated={handlePostCreated}
-        />
-        {loading ? (
-          <CircularProgress className="loading-spinner" />
-        ) : error ? (
-          <p className="error-message">{error}</p>
-        ) : (
-          <List className="post-list">
-            {posts.map(post => (
-              <ListItem key={post.id}>
-                <ListItemText primary={post.title} />
-                {/* <ListItemText >{post.body}</ListItemText>  */}
-              </ListItem>
-            ))}
-          </List>
-        )}
+      </div>
+      <CreatePost
+        open={isDialogOpen}
+        onClose={handleDialogClose}
+        userId={userId}
+        onPostCreated={handlePostCreated}
+      />
+      {loading ? (
+        <CircularProgress className="loading-spinner" />
+      ) : error ? (
+        <p className="error-message">{error}</p>
+      ) : (
+        <List className="post-list">
+          {posts.map(post => (
+            <ListItem key={post.id}>
+              <ListItemText primary={post.title} />
+              {/* <ListItemText >{post.body}</ListItemText>  */}
+            </ListItem>
+          ))}
+        </List>
+      )}
     </Paper>
   );
 };
