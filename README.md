@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+## React Test Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a single-page application built with React, showcasing a UsersTable component and UserPosts functionality.
 
-## Available Scripts
+### Installation
 
-In the project directory, you can run:
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Run `npm install` to install the dependencies.
+4. Run `npm start` to start the development server.
+5. Open your browser and navigate to `http://localhost:5173/` to view the application.
 
-### `npm start`
+### Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### UsersTable
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Displays a table of users fetched from [JSONPlaceholder](https://jsonplaceholder.typicode.com/users).
+- Columns: name, email, company name.
+- Ability to filter the table by name and email.
 
-### `npm test`
+#### UserPosts
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Upon selecting a user from the UsersTable, displays a list of posts posted by the selected user.
+- Data fetched from [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts).
+- Create post button opens a dialog to enter details for creating a new post.
+- Dialog includes validation.
+- After post creation, the list of posts for the user (UserPosts) is updated with the new post.
 
-### `npm run build`
+### Bonus Points
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Error handling for API data fetching.
+- Loading indicator while fetching data.
+- Search box to filter the table by name or email.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Recommendations
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Material-UI component library is used for a professional-looking UI.
+- Code is well-commented for clarity and understanding.
+- Latest React features like hooks are utilized.
+- Project structure promotes scalability and maintainability.
 
-### `npm run eject`
+### Important
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Ensure all dependencies are correctly installed and the project builds and runs without errors.
+- Test the project locally on a clean server to verify dependencies and functionality.
